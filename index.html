@@ -2,280 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Cytra's Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack's Real-Time Age</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: white;
       font-family: 'Segoe UI', sans-serif;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.light { background: #f0f0f0; color: #000; }
-    body.dark { background: #000000; color: #00ffea; }
-    body.blue { background: #001f3f; color: #00ffff; }
-    body.yellow { background: #fffacd; color: #333; }
-
-    .theme-toggle {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 1000;
-    }
-
-    .theme-toggle select {
-      padding: 6px 12px;
-      font-size: 15px;
-      border-radius: 6px;
-      box-shadow: 0 0 8px #00ffff;
-      background: #111;
-      color: white;
-      border: none;
-    }
-
-    .container {
-      padding: 25px;
-      max-width: 1000px;
-      margin: auto;
       text-align: center;
-    }
-
-    h1, h2, p {
-      text-shadow: 0 0 8px #00ffff;
-    }
-
-    #loadingScreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 28px;
-      z-index: 2000;
-      text-shadow: 0 0 10px cyan;
-    }
-
-    .map-container {
-      margin: 20px auto;
-      max-width: 90%;
-      box-shadow: 0 0 20px rgba(0,255,255,0.5);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-    }
-
-    .codm {
-      margin-top: 40px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 12px;
-      box-shadow: 0 0 18px #00ffcc;
-    }
-
-    #ageSection {
-      margin-top: 30px;
-      padding: 20px;
-      background: #111;
-      border-radius: 10px;
-      font-size: 18px;
-      color: #00ffff;
-      box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+      padding: 40px;
+      font-size: 20px;
     }
 
     #ageDisplay {
+      margin-top: 50px;
+      padding: 20px;
+      font-size: 24px;
       font-weight: bold;
-      font-size: 20px;
-      margin-top: 10px;
-      text-shadow: 0 0 10px #00ffcc;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      animation: glow 3s infinite ease-in-out;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
+      100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
     }
 
     #toggleVoice {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #00ffff30;
-      border: 1px solid #00ffff;
-      color: white;
-      border-radius: 6px;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: #222;
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 15px #00ffff;
-      transition: transform 0.3s;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     #toggleVoice:hover {
+      background: #444;
       transform: scale(1.05);
-      box-shadow: 0 0 25px #00ffff;
-    }
-
-    #voiceStatus {
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 5px;
-      text-shadow: 0 0 5px #00ffff;
-    }
-
-    img.koshka {
-      max-width: 300px;
-      margin-top: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ffff;
-    }
-
-    .link-btn {
-      display: inline-block;
-      margin: 15px 10px;
-      padding: 12px 25px;
-      font-size: 18px;
-      color: white;
-      background: #111;
-      border: 2px solid #00ffff;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 0 15px #00ffff;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .link-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #00ffff;
-    }
-
-    .links {
-      margin-top: 40px;
     }
   </style>
 </head>
-<body class="dark">
+<body>
+  <h1>Jack's Real-Time Age Counter</h1>
+  <div id="ageDisplay">Loading age...</div>
+  <button id="toggleVoice">🔇 Voice OFF</button>
 
-<div id="loadingScreen">🚀 Loading your profile...</div>
+  <script>
+    const birthDate = new Date("2009-03-30T00:00:00");
+    const ageDisplay = document.getElementById("ageDisplay");
+    let voiceOn = false;
+    let lastSpoken = 0;
 
-<div class="theme-toggle">
-  <select id="theme">
-    <option value="light">☀ Light</option>
-    <option value="dark" selected>🌙 Dark</option>
-    <option value="blue">🔵 Blue</option>
-    <option value="yellow">🌕 Yellow</option>
-  </select>
-</div>
+    function updateAge() {
+      const now = new Date();
+      const diff = now - birthDate;
 
-<div class="container" id="mainContent" style="display: none;">
-  <h1>💫 Hi, I'm Jack a.k.a. Cytra</h1>
-  <p>I’m 16 years old, born on <strong>30th March 2009</strong>.</p>
-  <p>I live in <strong>Ruaka, Nairobi</strong> and I’m studying at <strong>Baricho High School</strong> in Kirinyaga County.</p>
+      const ms = diff;
+      const sec = Math.floor(ms / 1000);
+      const min = Math.floor(sec / 60);
+      const hr = Math.floor(min / 60);
+      const days = Math.floor(hr / 24);
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(days / 30.44);
+      const yrs = Math.floor(days / 365.25);
 
-  <div class="links">
-    <a href="https://ramsey.onrender.com" target="_blank" class="link-btn">📷 View My Pics</a>
-    <a href="https://socialmedia-m7z4.onrender.com" target="_blank" class="link-btn">🌐 My Social Media</a>
-  </div>
+      const s = sec % 60;
+      const m = min % 60;
+      const h = hr % 24;
+      const milli = ms % 1000;
 
-  <h2>📍 Ruaka Location</h2>
-  <div class="map-container">
-    <iframe src="https://www.google.com/maps?q=ruaka,nairobi&output=embed"></iframe>
-  </div>
+      const txt = `Jack is now ${yrs} years, ${months} months, ${weeks} weeks, ${days} days, ${h} hours, ${m} minutes, ${s} seconds, and ${milli} milliseconds old.`;
+      ageDisplay.textContent = txt;
 
-  <h2>🏫 Baricho High School</h2>
-  <div class="map-container">
-    <iframe src="https://www.google.com/maps?q=Baricho+High+School+Kirinyaga&output=embed"></iframe>
-  </div>
-
-  <div id="ageSection">
-    <h2>⏳ Real-Time Age</h2>
-    <div id="ageDisplay">Calculating age...</div>
-    <button id="toggleVoice">🔊 Toggle Voice</button>
-    <div id="voiceStatus">Voice: ON</div>
-  </div>
-
-  <div class="codm">
-    <h2>🎮 Call of Duty Mobile</h2>
-    <p>I love using the <strong>Koshka</strong> sniper! My username is: <strong>kenya_cytra</strong></p>
-    <img src="https://static.wikia.nocookie.net/callofduty/images/b/b7/Koshka_CODM.png" alt="Koshka Sniper" class="koshka" />
-    <p><a href="https://www.callofduty.com/mobile" target="_blank">Add me on COD Mobile</a></p>
-  </div>
-</div>
-
-<audio id="bgMusic" autoplay loop style="display:none">
-  <source id="musicSource" src="Die With A Smile.m4a" type="audio/mp4">
-</audio>
-
-<script>
-  const themeSelect = document.getElementById('theme');
-  themeSelect.addEventListener('change', () => {
-    document.body.className = themeSelect.value;
-  });
-
-  window.onload = () => {
-    setTimeout(() => {
-      document.getElementById("loadingScreen").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-    }, 800);
-  };
-
-  let inactivityTimer;
-  function resetTimer() {
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => location.reload(), 2 * 60 * 1000);
-  }
-  ["mousemove", "keydown", "click", "scroll", "touchstart"].forEach(evt =>
-    document.addEventListener(evt, resetTimer)
-  );
-  resetTimer();
-
-  const birthDate = new Date("2009-03-30T00:00:00");
-  let voiceOn = true;
-  let lastSpoken = 0;
-  const ageDisplay = document.getElementById("ageDisplay");
-  const voiceStatus = document.getElementById("voiceStatus");
-  document.getElementById("toggleVoice").onclick = () => {
-    voiceOn = !voiceOn;
-    voiceStatus.textContent = voiceOn ? "Voice: ON" : "Voice: OFF";
-    speechSynthesis.cancel();
-  };
-
-  function updateAge() {
-    const now = new Date();
-    const diff = now - birthDate;
-
-    const ms = diff;
-    const sec = Math.floor(ms / 1000);
-    const min = Math.floor(sec / 60);
-    const hr = Math.floor(min / 60);
-    const days = Math.floor(hr / 24);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(days / 30.44);
-    const yrs = Math.floor(days / 365.25);
-
-    const s = sec % 60;
-    const m = min % 60;
-    const h = hr % 24;
-    const milli = ms % 1000;
-
-    const txt = `Jack is now ${yrs} years, ${months} months, ${weeks} weeks, ${days} days, ${h} hours, ${m} minutes, ${s} seconds, and ${milli} milliseconds old.`;
-    ageDisplay.textContent = txt;
-
-    if (voiceOn && Date.now() - lastSpoken > 25000) {
-      const utter = new SpeechSynthesisUtterance(txt);
-      utter.lang = "en-US";
-      utter.rate = 0.95;
-      speechSynthesis.cancel();
-      speechSynthesis.speak(utter);
-      lastSpoken = Date.now();
+      // Speak every 1.5 minutes (90,000ms)
+      if (voiceOn && Date.now() - lastSpoken > 90000) {
+        const utter = new SpeechSynthesisUtterance(txt);
+        utter.lang = "en-US";
+        utter.rate = 0.95;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utter);
+        lastSpoken = Date.now();
+      }
     }
-  }
 
-  setInterval(updateAge, 1000);
-  updateAge();
-</script>
+    document.getElementById("toggleVoice").addEventListener("click", () => {
+      voiceOn = !voiceOn;
+      document.getElementById("toggleVoice").textContent = voiceOn ? "🔊 Voice ON" : "🔇 Voice OFF";
+    });
 
+    setInterval(updateAge, 200);
+  </script>
 </body>
 </html>
