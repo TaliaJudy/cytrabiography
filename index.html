@@ -3,194 +3,206 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cytra's Ultimate Profile</title>
+  <title>Cytra Biography</title>
   <style>
-    /* Global Styles */
-    * { box-sizing:border-box; margin:0; padding:0; }
     body {
+      margin: 0;
+      padding: 20px;
       font-family: 'Segoe UI', sans-serif;
-      padding:20px;
-      text-align:center;
-      transition: background 1s ease, color 1s ease;
+      color: white;
+      background: linear-gradient(135deg, #000, #222);
+      text-align: center;
+      transition: background 1s;
     }
-    .glow { text-shadow:0 0 10px #fff,0 0 20px #0ff; }
-    button, .link-button {
-      border:none; border-radius:8px; padding:12px 24px;
-      margin:10px; font-size:18px; cursor:pointer;
-      box-shadow:0 0 15px rgba(255,255,255,0.4);
-      transition:transform .2s;
+    h1, h2 {
+      text-shadow: 0 0 10px cyan;
     }
-    button:hover { transform:scale(1.05); }
-    .section { margin:40px 0; }
-    iframe, img { border-radius:12px; margin-top:15px; max-width:90%; box-shadow:0 0 20px rgba(0,255,255,0.4); }
-    #liveAge { font-size:22px; font-weight:bold; color:#0ff; margin-top:10px; }
-    #themeToggle {
-      position:fixed; top:10px; right:10px; z-index:1000;
-      padding:8px 16px; font-size:16px;
+    .glow {
+      animation: glow 1.5s infinite alternate;
     }
-
-    /* Themes */
-    .light { background:#f5f5f5; color:#333; }
-    .dark { background:#121212; color:#eee; }
-    .blue { background:#001f3f; color:#fff; }
-    .yellow { background:#fff8dc; color:#333; }
-    .purple { background:linear-gradient(135deg,#5e60ce,#7400b8); color:#fff; }
-    .applegreen { background:linear-gradient(135deg,#a8e6cf,#56ab2f); color:#222; }
-    .darkred { background:linear-gradient(135deg,#8b0000,#4b0000); color:#fff; }
-    .pinkblue { background:linear-gradient(135deg,#ff9a9e,#00c6ff); color:#222; }
-    .rainbow {
-      background: linear-gradient(270deg,#ff0080,#ff8c00,#40e0d0,#8a2be2,#ff0080);
-      background-size:1000% 1000%;
-      animation:rainbowAnimation 18s ease infinite;
-      color:#fff;
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #0ff; }
+      to   { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
     }
-    @keyframes rainbowAnimation {
-      0%,100%{background-position:0% 50%}
-      50%{background-position:100% 50%}
+    .section {
+      margin: 30px auto;
+      max-width: 800px;
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #0ff;
     }
-    .rainbow .glow, .rainbow h1,h2,p, .rainbow span {
-      text-shadow:0 0 5px #fff,0 0 10px #ff00ff,0 0 20px #00ffff;
-      animation:glowText 2.5s ease-in-out infinite alternate;
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 10px;
     }
-    @keyframes glowText {
-      from{text-shadow:0 0 5px #fff,0 0 10px #ff00ff;}
-      to{text-shadow:0 0 20px #00ffff,0 0 30px #ff00ff;}
+    button, .theme-btn {
+      padding: 12px 25px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #00ffff30;
+      color: white;
+      cursor: pointer;
+      text-shadow: 0 0 5px cyan;
+      box-shadow: 0 0 10px cyan;
+      transition: transform 0.3s ease;
     }
-    .rainbow button, .rainbow .link-button {
-      background:linear-gradient(45deg,#ff00cc,#3333ff,#00ffcc,#ffcc00);
-      background-size:400% 400%;
-      animation:glitterBtn 3s linear infinite;
+    button:hover, .theme-btn:hover {
+      transform: scale(1.1);
+      background: #00ffff60;
     }
-    @keyframes glitterBtn {
-      0%, 100%{background-position:0% 50%}
-      50%{background-position:100% 50%}
+    #ageDisplay, #sessionDisplay {
+      font-size: 20px;
+      margin: 10px 0;
+      text-shadow: 0 0 4px cyan;
     }
-
-    /* Chatbot */
-    #chatBot {
-      position:fixed; bottom:20px; right:20px; width:300px;
-      background:#111; border-radius:12px; padding:15px;
-      box-shadow:0 0 20px rgba(0,255,255,0.4); z-index:10000;
-      color:#0ff; font-family:sans-serif;
+    .codm img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0ff;
     }
-    #chatLog {
-      height:180px; overflow-y:auto;
-      background:#000; border:1px solid #0ff;
-      padding:10px; border-radius:8px; font-size:14px;
-    }
-    #userInput {
-      width:100%; padding:8px; border-radius:8px;
-      border:none; background:#222; color:#0ff; font-size:14px;
+    #chatbot {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: yellow;
+      color: black;
+      padding: 15px;
+      font-weight: bold;
+      border-top: 2px solid #444;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
     }
   </style>
 </head>
-<body class="dark">
+<body>
 
-  <!-- Theme Toggle -->
-  <button id="themeToggle">Toggle Theme 🎨</button>
+  <audio id="bgMusic" autoplay loop style="display: none">
+    <source id="musicSource" src="" type="audio/mp4">
+  </audio>
 
-  <!-- Intro -->
-  <h1 class="glow">👋 Hey, I'm Jack Cytra (Cytra)</h1>
-
-  <div class="section">
-    <p>I'm <strong>16</strong> years old (born March 30, 2009), living in <strong>Ruaka, Nairobi</strong>. I study at <strong>Baricho High School</strong> in Kirinyaga County, and I’m learning web development!</p>
-    <p>Age: <span id="ageFull"></span></p>
+  <div class="section glow">
+    <h1>👋 Welcome to Cytra's Biography</h1>
+    <p>Hello! I'm <strong>Jack (Cytra)</strong>, 16 years old, born on <strong>30th March 2009</strong>. I live in <strong>Ruaka, Nairobi</strong> and currently study at <strong>Baricho High School</strong> in Kirinyaga County.</p>
+    <p id="ageDisplay">Loading age...</p>
+    <p id="sessionDisplay">Loading session time...</p>
   </div>
 
-  <!-- Maps -->
   <div class="section">
-    <h2>📍 My Location: Ruaka</h2>
-    <iframe src="https://www.google.com/maps?q=Ruaka,Nairobi&output=embed" height="300"></iframe>
-  </div>
-  <div class="section">
-    <h2>🏫 My School: Baricho High School</h2>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18..."></iframe>
+    <h2>📍 Where I Live - Ruaka</h2>
+    <iframe src="https://www.google.com/maps?q=Ruaka,+Nairobi&output=embed"></iframe>
   </div>
 
-  <!-- CODM -->
   <div class="section">
+    <h2>🏫 My School - Baricho High School</h2>
+    <iframe src="https://www.google.com/maps?q=Baricho+High+School,+Kirinyaga&output=embed"></iframe>
+  </div>
+
+  <div class="section codm">
     <h2>🎮 Call of Duty Mobile</h2>
-    <p>Username: <strong>kenya_cytra</strong> — I love using the <strong>Koshka</strong> sniper rifle!</p>
-    <img src="https://cdn.codm.gg/wp-content/uploads/2023/07/Koshka_sniper.png" alt="Koshka Sniper" height="200">
-    <a href="https://www.callofduty.com/mobile" target="_blank"><button>Add Me on CODM 🎯</button></a>
+    <p>My username is <strong>kenya_cytra</strong> and I love using the Koshka Sniper.</p>
+    <img src="https://static.wikia.nocookie.net/callofduty/images/7/71/Koshka_CODMobile.png" alt="Koshka Sniper" />
+    <p><a href="codm://friend/add?username=kenya_cytra"><button>Add me in CODM</button></a></p>
   </div>
 
-  <!-- Links -->
   <div class="section">
-    <a class="link-button" href="https://ramsey.onrender.com" target="_blank">📷 View My Pics</a>
-    <a class="link-button" href="https://socialmedia-m7z4.onrender.com/" target="_blank">🌐 My Social Media</a>
+    <h2>🌐 Explore My Other Sites</h2>
+    <a href="https://ramsey.onrender.com"><button>📷 View My Pics</button></a>
+    <a href="https://socialmedia-m7z4.onrender.com/"><button>🔗 Social Media Handles</button></a>
   </div>
 
-  <!-- Live Age -->
-  <div class="section">
-    <h2>⏳ Live Age Counter</h2>
-    <div id="liveAge"></div>
-  </div>
-
-  <!-- Offline Chatbot -->
-  <div id="chatBot">
-    <h3 style="margin-bottom:10px;">Ask Cytra 🤖</h3>
-    <div id="chatLog"></div>
-    <input id="userInput" placeholder="Type & hit Enter...">
-  </div>
-
-  <audio id="bgMusic" autoplay loop hidden></audio>
+  <div id="chatbot">🤖 I'm CytraBot. Ask me anything!</div>
 
   <script>
-    // Theme rotation
-    const themes = ['light','dark','blue','yellow','purple','applegreen','darkred','pinkblue','rainbow'];
-    let themeIndex = 0;
-    document.getElementById('themeToggle').addEventListener('click', rotateTheme);
-    setInterval(rotateTheme, 9000);
-    function rotateTheme() {
-      document.body.className = themes[themeIndex];
-      themeIndex = (themeIndex + 1) % themes.length;
-    }
+    // Age Calculation
+    const birthDate = new Date("2009-03-30T00:00:00");
+    const ageDisplay = document.getElementById("ageDisplay");
+    const synth = window.speechSynthesis;
 
-    // Age counter + voice
-    const birth = new Date("2009-03-30T00:00:00Z");
-    const liveAge = document.getElementById("liveAge");
-    const ageFull = document.getElementById("ageFull");
     function updateAge() {
-      const now = new Date(), diff = now - birth;
-      const ms = diff % 1000, s = Math.floor(diff/1000)%60;
-      const m = Math.floor(diff/60000)%60, h = Math.floor(diff/3600000)%24;
-      const d = Math.floor(diff/86400000), w = Math.floor(d/7);
-      const mo = Math.floor(d/30.44), yr = Math.floor(mo/12);
-      ageFull.textContent = yr + " years";
-      liveAge.textContent = `${yr} yrs ${mo%12} mo ${w%52} w ${d%7} d ${h} h ${m} m ${s} s ${ms} ms`;
+      const now = new Date();
+      const diff = now - birthDate;
+      const ms = diff % 1000;
+      const totalSec = Math.floor(diff / 1000);
+      const sec = totalSec % 60;
+      const min = Math.floor(totalSec / 60) % 60;
+      const hr = Math.floor(totalSec / 3600) % 24;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const yrs = Math.floor(days / 365.25);
+      const months = Math.floor(days / 30.44);
+      const weeks = Math.floor(days / 7);
+      ageDisplay.textContent = `Jack is now ${yrs} years, ${months} months, ${weeks} weeks, ${hr} hours, ${min} minutes, ${sec} seconds, ${ms} milliseconds old.`;
+      return { yrs, months, weeks, hr, min, sec, ms };
     }
-    setInterval(updateAge, 50);
-    updateAge();
-    setInterval(() => { speechSynthesis.speak(new SpeechSynthesisUtterance(liveAge.textContent)); }, 90000);
+    setInterval(updateAge, 100);
 
-    // Offline chatbot
-    const chatLog= document.getElementById('chatLog'), input= document.getElementById('userInput');
-    const resp = {
-      hello:"Hi! I'm Cytra's bot 😄",
-      "how old is jack":()=>liveAge.textContent,
-      "what school":"Baricho High School, Kirinyaga",
-      "codm username":"kenya_cytra",
-      "where is jack":"I'm in Ruaka, Nairobi 🇰🇪"
-    };
-    input.addEventListener('keypress', e => {
-      if(e.key==='Enter'){ const u=input.value.trim().toLowerCase(); input.value='';
-        chatLog.innerHTML+= `<div><strong>You:</strong> ${u}</div>`;
-        let r=resp[u]||"I don't know that. Try 'how old is jack', 'what school'.";
-        if(typeof r==='function') r=r();
-        chatLog.innerHTML+= `<div style="margin-bottom:5px;"><strong>Bot:</strong> ${r}</div>`;
-        chatLog.scrollTop=chatLog.scrollHeight;
+    // Speak Age every 1.5 minutes
+    setInterval(() => {
+      const age = updateAge();
+      const msg = new SpeechSynthesisUtterance(`Jack is now ${age.yrs} years, ${age.months} months, ${age.weeks} weeks, ${age.hr} hours, ${age.min} minutes, ${age.sec} seconds, and ${age.ms} milliseconds old.`);
+      synth.speak(msg);
+    }, 90000);
+
+    // Theme Auto-Changer
+    const colors = ["purple", "#8DB600", "#8B0000", "#FF69B4", "linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)"];
+    let themeIndex = 0;
+    setInterval(() => {
+      document.body.style.background = colors[themeIndex];
+      themeIndex = (themeIndex + 1) % colors.length;
+    }, 9000);
+
+    // Random Background Music
+    const musicFiles = [
+      "Die With A Smile.m4a",
+      "SHOKA.m4a",
+      "AUD-20250421-WA0004.m4a",
+      "Anxiety.m4a"
+    ];
+    function playRandomMusic() {
+      const randomFile = musicFiles[Math.floor(Math.random() * musicFiles.length)];
+      const music = document.getElementById("bgMusic");
+      const source = document.getElementById("musicSource");
+      source.src = randomFile;
+      music.load();
+      music.volume = 0;
+      music.play().then(() => {
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+          vol += 0.05;
+          if (vol >= 0.5) {
+            music.volume = 0.5;
+            clearInterval(fadeIn);
+          } else {
+            music.volume = vol;
+          }
+        }, 200);
+      }).catch(() => console.warn("Music autoplay blocked"));
+    }
+    playRandomMusic();
+
+    // Session Timer
+    let sessionStart = Date.now();
+    const sessionDisplay = document.getElementById("sessionDisplay");
+    function updateSessionTime() {
+      const now = Date.now();
+      const elapsed = now - sessionStart;
+      const sec = Math.floor(elapsed / 1000) % 60;
+      const min = Math.floor(elapsed / 60000) % 60;
+      const hrs = Math.floor(elapsed / 3600000);
+      sessionDisplay.textContent = `⏳ You've been here: ${hrs} hrs ${min} min ${sec} sec`;
+
+      if (elapsed >= 180000) {
+        alert("⏰ You've spent 3 minutes here. See you later!");
+        window.location.href = "https://google.com";
       }
-    });
-
-    // Background music
-    const music = ["Die With A Smile.m4a","SHOKA.m4a","AUD-20250421-WA0004.m4a","Anxiety.m4a"];
-    const bg = document.getElementById('bgMusic');
-    function playRandom(){ bg.src=music[Math.floor(Math.random()*music.length)]; bg.play().catch(()=>{}); }
-    playRandom(); bg.volume=0; const fade = setInterval(() =>{ if(bg.volume<0.5) bg.volume+=0.05; else clearInterval(fade); },200);
-
-    // Auto-refresh inactivity
-    let timer; ['click','mousemove','keydown','scroll'].forEach(e=>document.addEventListener(e,()=>{clearTimeout(timer);timer=setTimeout(()=>location.reload(),120000);})); timer=setTimeout(()=>location.reload(),120000);
+    }
+    setInterval(updateSessionTime, 1000);
   </script>
 </body>
 </html>
