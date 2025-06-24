@@ -2,102 +2,197 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jack's Real-Time Age</title>
+  <title>Cytra's Biography</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body {
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: white;
+    html, body {
+      margin: 0; padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      padding: 40px;
-      font-size: 20px;
+      transition: background 0.3s, color 0.3s;
     }
+    body.light { background: #f0f0f0; color: #000; }
+    body.dark  { background: #000; color: #0ff; }
+    body.blue  { background: #001f3f; color: #0ff; }
+    body.yellow{ background: #fffacd; color: #333; }
 
-    #ageDisplay {
-      margin-top: 50px;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-      animation: glow 3s infinite ease-in-out;
-    }
-
-    @keyframes glow {
-      0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
-      100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
-    }
-
-    #toggleVoice {
-      margin-top: 30px;
-      padding: 12px 24px;
-      background: #222;
-      color: #fff;
-      border: none;
-      font-size: 18px;
+    header, section { padding: 20px; text-align: center; }
+    h1, h2, p { margin: 10px 0; }
+    a.btn {
+      display: inline-block; margin: 10px;
+      padding: 12px 24px; font-size: 18px;
       border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      background: #111; color: #fff;
+      text-decoration: none;
+      box-shadow: 0 0 12px #0ff;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    a.btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 22px #0ff;
     }
 
-    #toggleVoice:hover {
-      background: #444;
-      transform: scale(1.05);
+    .map)container {
+      margin: 20px auto; max-width: 90%;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,255,255,0.4);
+    }
+    iframe { width: 100%; height: 300px; border: 0; }
+
+    #ageSection {
+      margin: 30px auto;
+      padding: 20px;
+      background: #111;
+      border-radius: 10px;
+      color: #0ff;
+      box-shadow: 0 0 20px #0ff;
+    }
+    #ageDisplay {
+      font-size: 20px;
+      margin: 10px 0;
+      text-shadow: 0 0 8px #0ff;
+    }
+    button { margin-top: 10px; padding: 10px 24px; font-size: 16px;
+      background: #222; color: #fff; border: 0; border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #0ff; transition: background 0.3s, transform 0.2s;
+    }
+    button:hover { background: #444; transform: scale(1.05); }
+
+    .codm {
+      margin-top: 30px;
+      padding: 20px;
+      box-shadow: 0 0 18px #0ff;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.2);
+    }
+    .codm img { max-width: 250px; margin-top: 10px; box-shadow: 0 0 12px #0ff; }
+    .theme-toggle {
+      position: fixed; top: 10px; right: 10px; z-index: 10;
+    }
+    .theme-toggle select {
+      padding: 6px 12px;
+      background: #111; color: #fff;
+      border: none; border-radius: 6px;
+      box-shadow: 0 0 8px #0ff;
+    }
+    #loading {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #000; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      z-index: 1000;
+      text-shadow: 0 0 10px cyan;
     }
   </style>
 </head>
-<body>
-  <h1>Jack's Real-Time Age Counter</h1>
-  <div id="ageDisplay">Loading age...</div>
-  <button id="toggleVoice">🔇 Voice OFF</button>
+<body class="dark">
+
+  <div id="loading">Loading...</div>
+
+  <div class="theme-toggle">
+    <select id="theme">
+      <option value="light">Light</option>
+      <option value="dark" selected>Dark</option>
+      <option value="blue">Blue</option>
+      <option value="yellow">Yellow</option>
+    </select>
+  </div>
+
+  <header>
+    <h1>👋 Hi, I’m Jack (Cytra)</h1>
+    <p>Age: 16 | Born: 30th March 2009</p>
+    <p>Location: Ruaka, Nairobi | School: Baricho High School (Kirinyaga)</p>
+  </header>
+
+  <section class="links">
+    <a href="https://ramsey.onrender.com" target="_blank" class="btn">📷 View My Pics</a>
+    <a href="https://socialmedia-m7z4.onrender.com" target="_blank" class="btn">🌐 My Social Media</a>
+  </section>
+
+  <section>
+    <h2>📍 Where I Live – Ruaka</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps?q=ruaka,nairobi&output=embed"></iframe>
+    </div>
+
+    <h2>🏫 My School – Baricho High</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps?q=Baricho+High+School+Kirinyaga&output=embed"></iframe>
+    </div>
+  </section>
+
+  <section id="ageSection">
+    <h2>⏳ Live Age Counter</h2>
+    <div id="ageDisplay">Calculating...</div>
+    <button id="toggleVoice">🔇 Voice OFF</button>
+  </section>
+
+  <section class="codm">
+    <h2>🎮 Call of Duty: Mobile</h2>
+    <p>I use the Koshka sniper in game — username: <strong>kenya_cytra</strong></p>
+    <img src="https://static.wikia.nocookie.net/callofduty/images/b/b7/Koshka_CODM.png" alt="Koshka Sniper">
+    <p><a href="https://www.callofduty.com/mobile" target="_blank" class="btn">Add Me on CODM</a></p>
+  </section>
+
+  <audio id="bgm" autoplay loop style="display:none">
+    <source id="musicSrc" src="Die With A Smile.m4a" type="audio/mp4">
+  </audio>
 
   <script>
-    const birthDate = new Date("2009-03-30T00:00:00");
-    const ageDisplay = document.getElementById("ageDisplay");
-    let voiceOn = false;
-    let lastSpoken = 0;
+    window.onload = () => {
+      document.getElementById('loading').style.display = 'none';
+    };
 
-    function updateAge() {
+    document.getElementById('theme').addEventListener('change', e => {
+      document.body.className = e.target.value;
+    });
+
+    let inactivity;
+    function resetTimer() {
+      clearTimeout(inactivity);
+      inactivity = setTimeout(() => location.reload(), 2*60*1000);
+    }
+    ['click','mousemove','keydown','scroll','touchstart']
+      .forEach(ev => document.addEventListener(ev, resetTimer));
+    resetTimer();
+
+    const birth = new Date('2009-03-30T00:00:00');
+    let voice = false, lastSpeak = 0;
+
+    const ageEl = document.getElementById('ageDisplay');
+    const voiceBtn = document.getElementById('toggleVoice');
+    voiceBtn.onclick = () => {
+      voice = !voice;
+      voiceBtn.textContent = voice ? '🔊 Voice ON' : '🔇 Voice OFF';
+      speechSynthesis.cancel();
+    };
+
+    function update() {
       const now = new Date();
-      const diff = now - birthDate;
+      const diff = now - birth;
 
       const ms = diff;
-      const sec = Math.floor(ms / 1000);
-      const min = Math.floor(sec / 60);
-      const hr = Math.floor(min / 60);
-      const days = Math.floor(hr / 24);
-      const weeks = Math.floor(days / 7);
-      const months = Math.floor(days / 30.44);
-      const yrs = Math.floor(days / 365.25);
+      const s = Math.floor(ms/1000), m = Math.floor(s/60), h = Math.floor(m/60);
+      const days = Math.floor(h/24), weeks = Math.floor(days/7);
+      const months = Math.floor(days/30.44), yrs = Math.floor(days/365.25);
+      const ds = days % 365.25, hs = h % 24, msMin = m % 60, ss = s % 60, msRem = ms % 1000;
 
-      const s = sec % 60;
-      const m = min % 60;
-      const h = hr % 24;
-      const milli = ms % 1000;
+      ageEl.textContent = 
+        `Jack is ${yrs}y ${months}mo ${weeks}w ${days}d ${hs}h ${msMin}m ${ss}s ${msRem}ms old`;
 
-      const txt = `Jack is now ${yrs} years, ${months} months, ${weeks} weeks, ${days} days, ${h} hours, ${m} minutes, ${s} seconds, and ${milli} milliseconds old.`;
-      ageDisplay.textContent = txt;
-
-      // Speak every 1.5 minutes (90,000ms)
-      if (voiceOn && Date.now() - lastSpoken > 90000) {
-        const utter = new SpeechSynthesisUtterance(txt);
-        utter.lang = "en-US";
-        utter.rate = 0.95;
+      if (voice && Date.now() - lastSpeak > 90_000) {
+        const ut = new SpeechSynthesisUtterance(ageEl.textContent);
+        ut.lang = 'en-US'; ut.rate = 0.95;
         speechSynthesis.cancel();
-        speechSynthesis.speak(utter);
-        lastSpoken = Date.now();
+        speechSynthesis.speak(ut);
+        lastSpeak = Date.now();
       }
     }
 
-    document.getElementById("toggleVoice").addEventListener("click", () => {
-      voiceOn = !voiceOn;
-      document.getElementById("toggleVoice").textContent = voiceOn ? "🔊 Voice ON" : "🔇 Voice OFF";
-    });
-
-    setInterval(updateAge, 200);
+    setInterval(update, 200);
+    update();
   </script>
 </body>
 </html>
