@@ -3,192 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cytra Biography</title>
+  <title>Cytra's Ultimate Profile</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* Global Styles */
+    * { box-sizing:border-box; margin:0; padding:0; }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #000;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      transition: background-color 1s ease;
+      padding:20px;
+      text-align:center;
+      transition: background 1s ease, color 1s ease;
     }
-
-    h1, h2, p {
-      margin: 20px auto;
-      max-width: 800px;
-    }
-
-    .glow {
-      text-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 30px #0ff;
-    }
-
+    .glow { text-shadow:0 0 10px #fff,0 0 20px #0ff; }
     button, .link-button {
-      background: linear-gradient(45deg, #00f, #f0f);
-      border: none;
-      padding: 12px 24px;
-      margin: 10px;
-      font-size: 18px;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-      transition: transform 0.2s ease-in-out;
+      border:none; border-radius:8px; padding:12px 24px;
+      margin:10px; font-size:18px; cursor:pointer;
+      box-shadow:0 0 15px rgba(255,255,255,0.4);
+      transition:transform .2s;
     }
-
-    button:hover {
-      transform: scale(1.1);
-    }
-
-    .section {
-      margin: 40px 0;
-    }
-
+    button:hover { transform:scale(1.05); }
+    .section { margin:40px 0; }
+    iframe, img { border-radius:12px; margin-top:15px; max-width:90%; box-shadow:0 0 20px rgba(0,255,255,0.4); }
+    #liveAge { font-size:22px; font-weight:bold; color:#0ff; margin-top:10px; }
     #themeToggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 1000;
+      position:fixed; top:10px; right:10px; z-index:1000;
+      padding:8px 16px; font-size:16px;
     }
 
-    iframe {
-      border-radius: 12px;
-      margin-top: 15px;
-      box-shadow: 0 0 20px rgba(0,255,255,0.4);
+    /* Themes */
+    .light { background:#f5f5f5; color:#333; }
+    .dark { background:#121212; color:#eee; }
+    .blue { background:#001f3f; color:#fff; }
+    .yellow { background:#fff8dc; color:#333; }
+    .purple { background:linear-gradient(135deg,#5e60ce,#7400b8); color:#fff; }
+    .applegreen { background:linear-gradient(135deg,#a8e6cf,#56ab2f); color:#222; }
+    .darkred { background:linear-gradient(135deg,#8b0000,#4b0000); color:#fff; }
+    .pinkblue { background:linear-gradient(135deg,#ff9a9e,#00c6ff); color:#222; }
+    .rainbow {
+      background: linear-gradient(270deg,#ff0080,#ff8c00,#40e0d0,#8a2be2,#ff0080);
+      background-size:1000% 1000%;
+      animation:rainbowAnimation 18s ease infinite;
+      color:#fff;
+    }
+    @keyframes rainbowAnimation {
+      0%,100%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+    }
+    .rainbow .glow, .rainbow h1,h2,p, .rainbow span {
+      text-shadow:0 0 5px #fff,0 0 10px #ff00ff,0 0 20px #00ffff;
+      animation:glowText 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes glowText {
+      from{text-shadow:0 0 5px #fff,0 0 10px #ff00ff;}
+      to{text-shadow:0 0 20px #00ffff,0 0 30px #ff00ff;}
+    }
+    .rainbow button, .rainbow .link-button {
+      background:linear-gradient(45deg,#ff00cc,#3333ff,#00ffcc,#ffcc00);
+      background-size:400% 400%;
+      animation:glitterBtn 3s linear infinite;
+    }
+    @keyframes glitterBtn {
+      0%, 100%{background-position:0% 50%}
+      50%{background-position:100% 50%}
     }
 
-    img {
-      border-radius: 12px;
-      margin-top: 15px;
-      box-shadow: 0 0 20px rgba(0,255,255,0.4);
+    /* Chatbot */
+    #chatBot {
+      position:fixed; bottom:20px; right:20px; width:300px;
+      background:#111; border-radius:12px; padding:15px;
+      box-shadow:0 0 20px rgba(0,255,255,0.4); z-index:10000;
+      color:#0ff; font-family:sans-serif;
     }
-
-    #liveAge {
-      font-size: 22px;
-      font-weight: bold;
-      color: #0ff;
-      margin-top: 10px;
+    #chatLog {
+      height:180px; overflow-y:auto;
+      background:#000; border:1px solid #0ff;
+      padding:10px; border-radius:8px; font-size:14px;
     }
-
-    .map-container {
-      width: 90%;
-      margin: auto;
+    #userInput {
+      width:100%; padding:8px; border-radius:8px;
+      border:none; background:#222; color:#0ff; font-size:14px;
     }
   </style>
 </head>
-<body>
+<body class="dark">
+
+  <!-- Theme Toggle -->
   <button id="themeToggle">Toggle Theme 🎨</button>
 
-  <h1 class="glow">Welcome to Cytra's World ✨</h1>
+  <!-- Intro -->
+  <h1 class="glow">👋 Hey, I'm Jack Cytra (Cytra)</h1>
 
   <div class="section">
-    <h2>👤 About Me</h2>
-    <p>Hey there! I'm <strong>Jack Cytra</strong>, born on <strong>March 30th, 2009</strong>. I live in <strong>Ruaka, Nairobi</strong> and I'm a proud student of <strong>Baricho High School</strong> in <strong>Kirinyaga County</strong>. I'm passionate about tech and gaming, and I'm learning web development with HTML, CSS, and JavaScript!</p>
-    <p>I am currently <span id="ageFull"></span> old.</p>
+    <p>I'm <strong>16</strong> years old (born March 30, 2009), living in <strong>Ruaka, Nairobi</strong>. I study at <strong>Baricho High School</strong> in Kirinyaga County, and I’m learning web development!</p>
+    <p>Age: <span id="ageFull"></span></p>
   </div>
 
+  <!-- Maps -->
   <div class="section">
-    <h2>📍 I Live in Ruaka</h2>
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps?q=Ruaka,Nairobi&output=embed" width="100%" height="300" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <h2>📍 My Location: Ruaka</h2>
+    <iframe src="https://www.google.com/maps?q=Ruaka,Nairobi&output=embed" height="300"></iframe>
   </div>
-
   <div class="section">
     <h2>🏫 My School: Baricho High School</h2>
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7788093757085!2d37.260909!3d-0.483241!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182899fe10fd0b6f%3A0x49d09e96c23db7c4!2sBaricho%20High%20School!5e0!3m2!1sen!2ske!4v1719200173684!5m2!1sen!2ske" width="100%" height="300" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18..."></iframe>
   </div>
 
+  <!-- CODM -->
   <div class="section">
-    <h2>🎮 I Play Call of Duty Mobile</h2>
+    <h2>🎮 Call of Duty Mobile</h2>
     <p>Username: <strong>kenya_cytra</strong> — I love using the <strong>Koshka</strong> sniper rifle!</p>
-    <img src="https://cdn.codm.gg/wp-content/uploads/2023/07/Koshka_sniper.png" alt="Koshka Sniper" width="300">
-    <br>
-    <a href="https://www.callofduty.com/mobile" target="_blank">
-      <button>Add Me on CODM 🎯</button>
-    </a>
+    <img src="https://cdn.codm.gg/wp-content/uploads/2023/07/Koshka_sniper.png" alt="Koshka Sniper" height="200">
+    <a href="https://www.callofduty.com/mobile" target="_blank"><button>Add Me on CODM 🎯</button></a>
   </div>
 
+  <!-- Links -->
   <div class="section">
-    <h2>📸 Want to see my pictures?</h2>
-    <a href="https://ramsey.onrender.com">
-      <button class="link-button">View Pics 📷</button>
-    </a>
-    <br><br>
-    <h2>📱 My Social Media Handles</h2>
-    <a href="https://socialmedia-m7z4.onrender.com/">
-      <button class="link-button">Social Links 🔗</button>
-    </a>
+    <a class="link-button" href="https://ramsey.onrender.com" target="_blank">📷 View My Pics</a>
+    <a class="link-button" href="https://socialmedia-m7z4.onrender.com/" target="_blank">🌐 My Social Media</a>
   </div>
 
+  <!-- Live Age -->
   <div class="section">
-    <h2>⏳ Real-Time Age Tracker</h2>
-    <p id="liveAge"></p>
+    <h2>⏳ Live Age Counter</h2>
+    <div id="liveAge"></div>
   </div>
 
-  <audio id="voiceAge" hidden></audio>
+  <!-- Offline Chatbot -->
+  <div id="chatBot">
+    <h3 style="margin-bottom:10px;">Ask Cytra 🤖</h3>
+    <div id="chatLog"></div>
+    <input id="userInput" placeholder="Type & hit Enter...">
+  </div>
 
-  <script>
-    // Real-time age calculation
-    const birthDate = new Date("2009-03-30T00:00:00Z");
-    const liveAge = document.getElementById("liveAge");
-    const voiceAge = document.getElementById("voiceAge");
-
-    function updateAge() {
-      const now = new Date();
-      const diff = now - birthDate;
-      const ms = diff % 1000;
-      const s = Math.floor(diff / 1000) % 60;
-      const m = Math.floor(diff / (1000 * 60)) % 60;
-      const h = Math.floor(diff / (1000 * 60 * 60)) % 24;
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const w = Math.floor(d / 7);
-      const months = Math.floor(d / 30.44);
-      const years = Math.floor(months / 12);
-
-      document.getElementById("ageFull").textContent = `${years} years`;
-      liveAge.textContent = `${years} yrs ${months % 12} months ${w % 52} weeks ${d % 7} days ${h} hrs ${m} min ${s} sec ${ms} ms`;
-    }
-
-    setInterval(updateAge, 50);
-    updateAge();
-
-    function speakAge() {
-      const utter = new SpeechSynthesisUtterance(liveAge.textContent);
-      utter.rate = 1;
-      utter.pitch = 1;
-      speechSynthesis.speak(utter);
-    }
-    setInterval(speakAge, 90000); // every 1.5 minutes
-  </script>
+  <audio id="bgMusic" autoplay loop hidden></audio>
 
   <script>
     // Theme rotation
-    const themes = [
-      "#1e1e1e", "#ffffff", "#007bff", "#ffeb3b",
-      "purple", "#8DB600", "#8B0000", "deeppink"
-    ];
+    const themes = ['light','dark','blue','yellow','purple','applegreen','darkred','pinkblue','rainbow'];
     let themeIndex = 0;
-    const toggleBtn = document.getElementById("themeToggle");
-
+    document.getElementById('themeToggle').addEventListener('click', rotateTheme);
+    setInterval(rotateTheme, 9000);
     function rotateTheme() {
-      document.body.style.backgroundColor = themes[themeIndex];
+      document.body.className = themes[themeIndex];
       themeIndex = (themeIndex + 1) % themes.length;
     }
 
-    setInterval(rotateTheme, 9000); // every 9 seconds
+    // Age counter + voice
+    const birth = new Date("2009-03-30T00:00:00Z");
+    const liveAge = document.getElementById("liveAge");
+    const ageFull = document.getElementById("ageFull");
+    function updateAge() {
+      const now = new Date(), diff = now - birth;
+      const ms = diff % 1000, s = Math.floor(diff/1000)%60;
+      const m = Math.floor(diff/60000)%60, h = Math.floor(diff/3600000)%24;
+      const d = Math.floor(diff/86400000), w = Math.floor(d/7);
+      const mo = Math.floor(d/30.44), yr = Math.floor(mo/12);
+      ageFull.textContent = yr + " years";
+      liveAge.textContent = `${yr} yrs ${mo%12} mo ${w%52} w ${d%7} d ${h} h ${m} m ${s} s ${ms} ms`;
+    }
+    setInterval(updateAge, 50);
+    updateAge();
+    setInterval(() => { speechSynthesis.speak(new SpeechSynthesisUtterance(liveAge.textContent)); }, 90000);
 
-    toggleBtn.addEventListener("click", () => {
-      rotateTheme();
+    // Offline chatbot
+    const chatLog= document.getElementById('chatLog'), input= document.getElementById('userInput');
+    const resp = {
+      hello:"Hi! I'm Cytra's bot 😄",
+      "how old is jack":()=>liveAge.textContent,
+      "what school":"Baricho High School, Kirinyaga",
+      "codm username":"kenya_cytra",
+      "where is jack":"I'm in Ruaka, Nairobi 🇰🇪"
+    };
+    input.addEventListener('keypress', e => {
+      if(e.key==='Enter'){ const u=input.value.trim().toLowerCase(); input.value='';
+        chatLog.innerHTML+= `<div><strong>You:</strong> ${u}</div>`;
+        let r=resp[u]||"I don't know that. Try 'how old is jack', 'what school'.";
+        if(typeof r==='function') r=r();
+        chatLog.innerHTML+= `<div style="margin-bottom:5px;"><strong>Bot:</strong> ${r}</div>`;
+        chatLog.scrollTop=chatLog.scrollHeight;
+      }
     });
+
+    // Background music
+    const music = ["Die With A Smile.m4a","SHOKA.m4a","AUD-20250421-WA0004.m4a","Anxiety.m4a"];
+    const bg = document.getElementById('bgMusic');
+    function playRandom(){ bg.src=music[Math.floor(Math.random()*music.length)]; bg.play().catch(()=>{}); }
+    playRandom(); bg.volume=0; const fade = setInterval(() =>{ if(bg.volume<0.5) bg.volume+=0.05; else clearInterval(fade); },200);
+
+    // Auto-refresh inactivity
+    let timer; ['click','mousemove','keydown','scroll'].forEach(e=>document.addEventListener(e,()=>{clearTimeout(timer);timer=setTimeout(()=>location.reload(),120000);})); timer=setTimeout(()=>location.reload(),120000);
   </script>
 </body>
 </html>
