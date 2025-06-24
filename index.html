@@ -12,25 +12,10 @@
       transition: background 0.3s, color 0.3s;
     }
 
-    body.light {
-      background: #f0f0f0;
-      color: #000;
-    }
-
-    body.dark {
-      background: #000000;
-      color: #00ffea;
-    }
-
-    body.blue {
-      background: #001f3f;
-      color: #00ffff;
-    }
-
-    body.yellow {
-      background: #fffacd;
-      color: #333;
-    }
+    body.light { background: #f0f0f0; color: #000; }
+    body.dark { background: #000000; color: #00ffea; }
+    body.blue { background: #001f3f; color: #00ffff; }
+    body.yellow { background: #fffacd; color: #333; }
 
     .theme-toggle {
       position: fixed;
@@ -147,13 +132,27 @@
       box-shadow: 0 0 15px #00ffff;
     }
 
-    a {
-      color: #00ffff;
+    .link-btn {
+      display: inline-block;
+      margin: 15px 10px;
+      padding: 12px 25px;
+      font-size: 18px;
+      color: white;
+      background: #111;
+      border: 2px solid #00ffff;
+      border-radius: 8px;
       text-decoration: none;
+      box-shadow: 0 0 15px #00ffff;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    a:hover {
-      text-shadow: 0 0 10px #00ffff;
+    .link-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00ffff;
+    }
+
+    .links {
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -174,6 +173,11 @@
   <h1>💫 Hi, I'm Jack a.k.a. Cytra</h1>
   <p>I’m 16 years old, born on <strong>30th March 2009</strong>.</p>
   <p>I live in <strong>Ruaka, Nairobi</strong> and I’m studying at <strong>Baricho High School</strong> in Kirinyaga County.</p>
+
+  <div class="links">
+    <a href="https://ramsey.onrender.com" target="_blank" class="link-btn">📷 View My Pics</a>
+    <a href="https://socialmedia-m7z4.onrender.com" target="_blank" class="link-btn">🌐 My Social Media</a>
+  </div>
 
   <h2>📍 Ruaka Location</h2>
   <div class="map-container">
@@ -217,7 +221,6 @@
     }, 800);
   };
 
-  // Inactivity auto-refresh
   let inactivityTimer;
   function resetTimer() {
     clearTimeout(inactivityTimer);
