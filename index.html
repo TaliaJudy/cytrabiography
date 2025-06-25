@@ -1,208 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cytra Biography</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      background: linear-gradient(135deg, #000, #222);
-      text-align: center;
-      transition: background 1s;
-    }
-    h1, h2 {
-      text-shadow: 0 0 10px cyan;
-    }
-    .glow {
-      animation: glow 1.5s infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #0ff; }
-      to   { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
-    }
-    .section {
-      margin: 30px auto;
-      max-width: 800px;
-      background: rgba(0,0,0,0.5);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #0ff;
-    }
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-      border-radius: 12px;
-      margin-top: 10px;
-    }
-    button, .theme-btn {
-      padding: 12px 25px;
-      font-size: 18px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #00ffff30;
-      color: white;
-      cursor: pointer;
-      text-shadow: 0 0 5px cyan;
-      box-shadow: 0 0 10px cyan;
-      transition: transform 0.3s ease;
-    }
-    button:hover, .theme-btn:hover {
-      transform: scale(1.1);
-      background: #00ffff60;
-    }
-    #ageDisplay, #sessionDisplay {
-      font-size: 20px;
-      margin: 10px 0;
-      text-shadow: 0 0 4px cyan;
-    }
-    .codm img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #0ff;
-    }
-    #chatbot {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: yellow;
-      color: black;
-      padding: 15px;
-      font-weight: bold;
-      border-top: 2px solid #444;
-      box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>✨ Cytra Biography - Ultimate Crazy Edition 🔥</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(
+      270deg,
+      #ff004c, #ff8000, #ff0, #80ff00, #00ffea, #0077ff, #7f00ff, #ff00c7
+    );
+    background-size: 1600% 1600%;
+    animation: gradientShift 8s ease infinite;
+    text-align: center;
+    overflow-x: hidden;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 20px white, 0 0 40px cyan;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { text-shadow: 0 0 20px white, 0 0 40px cyan; }
+    50% { text-shadow: 0 0 30px lime, 0 0 60px yellow; }
+  }
+  .section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: rgba(0,0,0,0.7);
+    border: 3px solid transparent;
+    border-radius: 24px;
+    box-shadow: 0 0 20px #fff;
+    animation: borderGlow 3s linear infinite;
+  }
+  @keyframes borderGlow {
+    0% { border-color: red; }
+    20% { border-color: orange; }
+    40% { border-color: yellow; }
+    60% { border-color: green; }
+    80% { border-color: blue; }
+    100% { border-color: violet; }
+  }
+  a {
+    color: #0ff;
+    text-decoration: none;
+    margin: 0 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 10px #0ff;
+    transition: all 0.3s;
+  }
+  a:hover {
+    background: #0ff;
+    color: #000;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 20px #0ff;
+  }
+  iframe {
+    width: 100%;
+    height: 250px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+  #ageDisplay, #sessionDisplay, #nextBirthdayDisplay {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+  }
+</style>
 </head>
 <body>
+  <h1>👑 Cytra's Ultimate Crazy Bio</h1>
 
-  <audio id="bgMusic" autoplay loop style="display: none">
-    <source id="musicSource" src="" type="audio/mp4">
-  </audio>
-
-  <div class="section glow">
-    <h1>👋 Welcome to Cytra's Biography</h1>
-    <p>Hello! I'm <strong>Jack (Cytra)</strong>, 16 years old, born on <strong>30th March 2009</strong>. I live in <strong>Ruaka, Nairobi</strong> and currently study at <strong>Baricho High School</strong> in Kirinyaga County.</p>
-    <p id="ageDisplay">Loading age...</p>
-    <p id="sessionDisplay">Loading session time...</p>
+  <div class="section">
+    <h2>💡 About Me</h2>
+    <p>Hey! I'm Jack (Cytra), 16 years old, born on March 30, 2009 🎂. I live in Ruaka, Nairobi and study at <a href="https://barichohighschool.sc.ke/" target="_blank">Baricho High School</a>. 😎</p>
+    <div id="ageDisplay">Loading real-time age…</div>
+    <div id="nextBirthdayDisplay">Loading next birthday timer…</div>
+    <div id="sessionDisplay">Loading session time…</div>
   </div>
 
   <div class="section">
-    <h2>📍 Where I Live - Ruaka</h2>
+    <h2>🏠 My Location — Ruaka</h2>
     <iframe src="https://www.google.com/maps?q=Ruaka,+Nairobi&output=embed"></iframe>
   </div>
 
   <div class="section">
-    <h2>🏫 My School - Baricho High School</h2>
+    <h2>🏫 My School — Baricho High School</h2>
     <iframe src="https://www.google.com/maps?q=Baricho+High+School,+Kirinyaga&output=embed"></iframe>
   </div>
 
-  <div class="section codm">
-    <h2>🎮 Call of Duty Mobile</h2>
-    <p>My username is <strong>kenya_cytra</strong> and I love using the Koshka Sniper.</p>
-    <img src="https://static.wikia.nocookie.net/callofduty/images/7/71/Koshka_CODMobile.png" alt="Koshka Sniper" />
-    <p><a href="codm://friend/add?username=kenya_cytra"><button>Add me in CODM</button></a></p>
-  </div>
-
   <div class="section">
-    <h2>🌐 Explore My Other Sites</h2>
-    <a href="https://ramsey.onrender.com"><button>📷 View My Pics</button></a>
-    <a href="https://socialmedia-m7z4.onrender.com/"><button>🔗 Social Media Handles</button></a>
+    <h2>🌐 My Links</h2>
+    <a href="https://ramsey.onrender.com" target="_blank">📷 My Pics</a>
+    <a href="https://socialmedia-m7z4.onrender.com/" target="_blank">💬 My Socials</a>
+    <a href="https://t.me/Cytra_k" target="_blank">✈️ Telegram</a>
   </div>
-
-  <div id="chatbot">🤖 I'm CytraBot. Ask me anything!</div>
 
   <script>
-    // Age Calculation
-    const birthDate = new Date("2009-03-30T00:00:00");
-    const ageDisplay = document.getElementById("ageDisplay");
-    const synth = window.speechSynthesis;
+    const birthDate = new Date('2009-03-30T00:00:00');
+    const nextBirthdayDisplay = document.getElementById('nextBirthdayDisplay');
+    const ageDisplay = document.getElementById('ageDisplay');
+    const sessionDisplay = document.getElementById('sessionDisplay');
+    let sessionStart = Date.now();
 
     function updateAge() {
       const now = new Date();
       const diff = now - birthDate;
       const ms = diff % 1000;
       const totalSec = Math.floor(diff / 1000);
-      const sec = totalSec % 60;
       const min = Math.floor(totalSec / 60) % 60;
       const hr = Math.floor(totalSec / 3600) % 24;
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const yrs = Math.floor(days / 365.25);
       const months = Math.floor(days / 30.44);
-      const weeks = Math.floor(days / 7);
-      ageDisplay.textContent = `Jack is now ${yrs} years, ${months} months, ${weeks} weeks, ${hr} hours, ${min} minutes, ${sec} seconds, ${ms} milliseconds old.`;
-      return { yrs, months, weeks, hr, min, sec, ms };
+      ageDisplay.innerText = `I'm ${yrs} years, ${months} months, ${hr} hours, ${min} minutes, ${ms} ms old 🔥`;
     }
-    setInterval(updateAge, 100);
 
-    // Speak Age every 1.5 minutes
-    setInterval(() => {
-      const age = updateAge();
-      const msg = new SpeechSynthesisUtterance(`Jack is now ${age.yrs} years, ${age.months} months, ${age.weeks} weeks, ${age.hr} hours, ${age.min} minutes, ${age.sec} seconds, and ${age.ms} milliseconds old.`);
-      synth.speak(msg);
-    }, 90000);
-
-    // Theme Auto-Changer
-    const colors = ["purple", "#8DB600", "#8B0000", "#FF69B4", "linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)"];
-    let themeIndex = 0;
-    setInterval(() => {
-      document.body.style.background = colors[themeIndex];
-      themeIndex = (themeIndex + 1) % colors.length;
-    }, 9000);
-
-    // Random Background Music
-    const musicFiles = [
-      "Die With A Smile.m4a",
-      "SHOKA.m4a",
-      "AUD-20250421-WA0004.m4a",
-      "Anxiety.m4a"
-    ];
-    function playRandomMusic() {
-      const randomFile = musicFiles[Math.floor(Math.random() * musicFiles.length)];
-      const music = document.getElementById("bgMusic");
-      const source = document.getElementById("musicSource");
-      source.src = randomFile;
-      music.load();
-      music.volume = 0;
-      music.play().then(() => {
-        let vol = 0;
-        const fadeIn = setInterval(() => {
-          vol += 0.05;
-          if (vol >= 0.5) {
-            music.volume = 0.5;
-            clearInterval(fadeIn);
-          } else {
-            music.volume = vol;
-          }
-        }, 200);
-      }).catch(() => console.warn("Music autoplay blocked"));
+    function updateNextBirthday() {
+      const now = new Date();
+      let nextBirthday = new Date(now.getFullYear() + (now > new Date(now.getFullYear(), 2, 30) ? 1 : 0), 2, 30);
+      let diff = nextBirthday - now;
+      let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      let hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      let mins = Math.floor((diff / (1000 * 60)) % 60);
+      nextBirthdayDisplay.innerText = `Next Birthday in ${days} days ${hrs} hrs ${mins} mins 🎉`;
     }
-    playRandomMusic();
 
-    // Session Timer
-    let sessionStart = Date.now();
-    const sessionDisplay = document.getElementById("sessionDisplay");
     function updateSessionTime() {
       const now = Date.now();
       const elapsed = now - sessionStart;
       const sec = Math.floor(elapsed / 1000) % 60;
       const min = Math.floor(elapsed / 60000) % 60;
       const hrs = Math.floor(elapsed / 3600000);
-      sessionDisplay.textContent = `⏳ You've been here: ${hrs} hrs ${min} min ${sec} sec`;
-
-      if (elapsed >= 180000) {
-        alert("⏰ You've spent 3 minutes here. See you later!");
-        window.location.href = "https://google.com";
-      }
+      sessionDisplay.innerText = `You're here ${hrs} hr ${min} min ${sec} sec ⏳`;
     }
-    setInterval(updateSessionTime, 1000);
+
+    setInterval(() => { updateAge(); updateNextBirthday(); updateSessionTime(); }, 1000);
   </script>
 </body>
 </html>
