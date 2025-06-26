@@ -3,216 +3,117 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cytra's Cosmic Biography</title>
+<title>Cytra's Biography ✨</title>
 <style>
   body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at center, #0A3D62, #0A1F2F);
     color: white;
-    background: linear-gradient(270deg, #ff004c, #ff8000, #ff0, #80ff00, #00ffea, #0077ff, #7f00ff, #ff00c7);
-    background-size: 1600% 1600%;
-    animation: gradientShift 8s ease infinite;
+    font-family: Arial, sans-serif;
     text-align: center;
-    overflow-x: hidden;
+    padding: 2rem;
   }
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  h1, h2 {
+    text-shadow: 0 0 10px #0ff;
+    animation: glow 1.5s infinite alternate;
   }
-  h1 {
-    font-size: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 20px white, 0 0 40px cyan;
-    margin: 1rem;
-  }
-  /* Cinematic intro animation for title */
-  .intro-title {
-    opacity: 0;
-    transform: scale(0.8);
-    animation: cinematicIntro 2s ease-out forwards;
-  }
-  @keyframes cinematicIntro {
-    0% { opacity: 0; transform: scale(0.8) rotate(-5deg); }
-    50% { opacity: 0.8; transform: scale(1.05) rotate(2deg); }
-    100% { opacity: 1; transform: scale(1) rotate(0); }
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #0ff; }
+    to { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
   }
   .section {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    background: rgba(0,0,0,0.7);
-    border: 3px solid transparent;
-    border-radius: 24px;
-    box-shadow: 0 0 20px #fff;
-    animation: borderGlow 3s linear infinite;
-  }
-  @keyframes borderGlow {
-    0% { border-color: red; }
-    20% { border-color: orange; }
-    40% { border-color: yellow; }
-    60% { border-color: green; }
-    80% { border-color: blue; }
-    100% { border-color: violet; }
-  }
-  a {
-    color: #0ff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 2px solid #0ff;
-    border-radius: 8px;
-    display: inline-block;
-    margin: 0.5rem;
-    animation: neonPulse 1s infinite alternate;
-    font-size: 1.1rem;
-    position: relative;
-  }
-  @keyframes neonPulse {
-    from { box-shadow: 0 0 10px #0ff; }
-    to { box-shadow: 0 0 20px #ff0; }
-  }
-  a:hover {
-    background: #0ff;
-    color: #000;
-    transform: scale(1.1) rotate(3deg);
-    box-shadow: 0 0 20px #0ff;
+    background: rgba(0,0,0,0.5);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #0ff;
+    max-width: 600px;
+    margin: 1.5rem auto;
   }
   iframe {
     width: 100%;
-    height: 250px;
+    height: 300px;
     border: none;
-    border-radius: 12px;
-    margin-top: 10px;
+    border-radius: 10px;
   }
-  #ageDisplay, #nextBirthdayDisplay, #sessionDisplay {
-    font-size: 1.2rem;
-    margin: 10px 0;
-    color: #0ff;
-    text-shadow: 0 0 10px #0ff;
+  input, textarea, button {
+    width: 100%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+    font-size: 1rem;
   }
-  .flash-icon {
-    animation: flash 1s infinite;
-    margin-right: 0.3rem;
-  }
-  @keyframes flash {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0.2; }
-  }
-  a[title]:hover::after {
-    content: attr(title);
-    position: absolute;
-    top: 110%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.5rem;
-    background: #222;
-    color: #0ff;
-    border: 1px solid #0ff;
-    border-radius: 8px;
-    width: 200px;
-    font-size: 0.9rem;
-    text-align: center;
+  button {
+    background: #0ff;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
     box-shadow: 0 0 10px #0ff;
-    z-index: 10;
+  }
+  button:hover {
+    background: #0cc;
   }
 </style>
 </head>
 <body>
 
-<h1 class="intro-title">👑 Cytra's Cosmic Biography</h1>
+<h1>👋 Welcome to Cytra's Biography</h1>
 
 <div class="section">
-  <div id="ageDisplay">Loading cosmic age...</div>
-  <div id="nextBirthdayDisplay">Loading next birthday timer...</div>
-  <div id="sessionDisplay">Loading session time...</div>
-  <p>Hey! I'm <strong>Jack (Cytra)</strong>, born <strong>March 30, 2009</strong>. I live in Ruaka, Nairobi and study at <a href="https://barichohighschool.sc.ke/" target="_blank">Baricho High School</a>. 🎮 CODM username: <strong>kenya_cytra</strong></p>
+  <h2>👤 About Me</h2>
+  <p>Hello! I'm <strong>Jack (Cytra)</strong>, 16 years old, born on <strong>March 30, 2009</strong>. I live in <strong>Ruaka, Nairobi</strong> and study at <strong>Baricho High School</strong>. Check my other links and leave a review! 🌟</p>
 </div>
 
 <div class="section">
-  <h2>📍 My Location — Ruaka</h2>
+  <h2>📍 Where I Live</h2>
   <iframe src="https://www.google.com/maps?q=Ruaka,+Nairobi&output=embed"></iframe>
 </div>
 
 <div class="section">
-  <h2>🏫 My School — Baricho High School</h2>
+  <h2>🏫 My School</h2>
   <iframe src="https://www.google.com/maps?q=Baricho+High+School,+Kirinyaga&output=embed"></iframe>
 </div>
 
 <div class="section">
-  <h2>🌐 My Links & Projects 🌐</h2>
-  <a href="https://ramsey.onrender.com" target="_blank">📷 My Pics</a>
-  <a href="https://socialmedia-m7z4.onrender.com/" target="_blank">💬 My Socials</a>
-  <a href="https://barichohighschool.sc.ke/" target="_blank">🏫 My School</a>
-  <a href="https://t.me/Cytra_k" target="_blank">✈️ My Telegram</a>
-  <a href="https://t.me/Cytrak9_bot" target="_blank">🤖 Song Downloader Bot</a>
-  <p style="margin: 0.3rem auto; max-width: 400px; color: #ccc; font-size: 0.95rem;">
-    🎧 Download any song or its lyrics instantly — just send the song title!
-  </p>
-  <a href="https://ig-ban.vercel.app/" target="_blank" title="🔥 Fun prank page to scare friends into thinking their IG can be banned by username.">
-    <span class="flash-icon">⚠️</span> IG Ban Prank
-  </a>
+  <h2>🌐 My Other Links</h2>
+  <a href="https://ramsey.onrender.com"><button>📷 My Pics</button></a>
+  <a href="https://socialmedia-m7z4.onrender.com/"><button>🔗 Social Media</button></a>
+  <a href="https://ig-ban.vercel.app/"><button>🚫 IG Ban Tool</button></a>
+  <a href="https://t.me/Cytrak9_bot"><button>🤖 Telegram Bot</button></a>
 </div>
 
+<!-- 💬 Review Section -->
 <div class="section">
-  <h2>📍 My Real-Time Location</h2>
-  <p id="locationStatus" style="color:#0ff;">Requesting location permission...</p>
-  <iframe id="liveLocationMap" width="100%" height="300" style="border:none;" allowfullscreen></iframe>
+  <h2>💬 Leave a Review</h2>
+  <p>Your feedback means a lot — leave your name and thoughts below:</p>
+  <form id="reviewForm">
+    <input id="reviewerName" placeholder="Your Name" required />
+    <textarea id="reviewerMessage" placeholder="Your Review" required></textarea>
+    <button type="submit">Send Review</button>
+  </form>
+  <div id="thankYouMessage" style="margin-top:1rem; color:#0ff; font-weight:bold; display:none;">✅ Thanks for your review — it’s been sent!</div>
 </div>
 
 <script>
-  const birthDate = new Date('2009-03-30T00:00:00');
-  const ageDisplay = document.getElementById('ageDisplay');
-  const nextBirthdayDisplay = document.getElementById('nextBirthdayDisplay');
-  const sessionDisplay = document.getElementById('sessionDisplay');
-  let sessionStart = Date.now();
+document.getElementById('reviewForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('reviewerName').value.trim();
+  const msg = document.getElementById('reviewerMessage').value.trim();
+  if(!name || !msg) return;
 
-  function updateTimers() {
-    const now = new Date();
-    const diff = now - birthDate;
-    const totalSec = Math.floor(diff / 1000);
-    const hr = Math.floor(totalSec / 3600) % 24;
-    const min = Math.floor(totalSec / 60) % 60;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const years = Math.floor(days / 365.25);
-    const months = Math.floor((days % 365.25) / 30.44);
-    ageDisplay.innerText = `I'm ${years} years, ${months} months, ${hr} hrs, ${min} mins old 🔥`;
+  const formURL = "https://docs.google.com/forms/d/e/1FAIpQLScfG-U9tE64ueNBsivDAcGSz2p92v5IetPe6k7fwxIm_GBY8A/formResponse";
+  const formData = new FormData();
+  formData.append('entry.901348001', name);  // "Your Name"
+  formData.append('entry.1112386370', msg);  // "Your Review"
 
-    let nextBirthday = new Date(now.getFullYear() + (now > new Date(now.getFullYear(), 2, 30) ? 1 : 0), 2, 30);
-    let diffBirthday = nextBirthday - now;
-    let bdDays = Math.floor(diffBirthday / (1000 * 60 * 60 * 24));
-    let bdHrs = Math.floor((diffBirthday / (1000 * 60 * 60)) % 24);
-    let bdMins = Math.floor((diffBirthday / (1000 * 60)) % 60);
-    nextBirthdayDisplay.innerText = `Next birthday in ${bdDays} days ${bdHrs} hrs ${bdMins} mins 🎂`;
-
-    const elapsed = now - sessionStart;
-    const elapsedSec = Math.floor(elapsed / 1000) % 60;
-    const elapsedMin = Math.floor(elapsed / 60000) % 60;
-    const elapsedHrs = Math.floor(elapsed / 3600000);
-    sessionDisplay.innerText = `⏳ You've been here ${elapsedHrs} hrs ${elapsedMin} mins ${elapsedSec} sec`;
+  try {
+    await fetch(formURL, { method: "POST", body: formData, mode: "no-cors" });
+    document.getElementById('thankYouMessage').style.display = 'block';
+    document.getElementById('reviewerName').value = '';
+    document.getElementById('reviewerMessage').value = '';
+  } catch (error) {
+    alert('Error submitting review — please try again.');
   }
-  setInterval(updateTimers, 1000);
-
-  const statusEl = document.getElementById('locationStatus');
-  const liveMap = document.getElementById('liveLocationMap');
-
-  if ('geolocation' in navigator) {
-    navigator.geolocation.watchPosition(
-      (position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        statusEl.innerText = `Your live coords: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
-        liveMap.src = `https://www.google.com/maps?q=${lat},${lon}&z=15&output=embed`;
-      },
-      (error) => {
-        statusEl.innerText = "Unable to retrieve your location.";
-      },
-      { enableHighAccuracy: true }
-    );
-  } else {
-    statusEl.innerText = "Your browser does not support geolocation.";
-  }
+};
 </script>
 
 </body>
